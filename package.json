@@ -4,7 +4,7 @@
   "description": "gmail filter on GAS",
   "private": true,
   "scripts": {
-    "publish": "yarn build && yarn upload",
+    "deploy": "yarn build && yarn upload",
     "build": "yarn tsc && yarn prebundle && browserify dest/main.js -p gasify -o bundle.js",
     "prebundle": "perl -pe 's/^var global;$//' -i dest/main.js",
     "upload": "gas push bundle.js"
