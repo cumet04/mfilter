@@ -4,7 +4,7 @@ var global: any
 type GmailThread = GoogleAppsScript.Gmail.GmailThread
 
 function main() {
-    setDryRun()
+    setDryRun(true)
 
     mfilter.execute([
         (thread: GmailThread) => {
@@ -16,6 +16,7 @@ function main() {
         (thread: GmailThread) => {
             Logger.log("flow2.action")
             Logger.log(`title: ${thread.getFirstMessageSubject()}`)
+            thread.markUnread()
             return false
         },
         (thread: GmailThread) => {

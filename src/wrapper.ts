@@ -4,9 +4,9 @@ type GmailAttachment = GoogleAppsScript.Gmail.GmailAttachment
 type GmailLabel = GoogleAppsScript.Gmail.GmailLabel
 type Integer = GoogleAppsScript.Integer
 
-var dry_run: boolean = false
-export function setDryRun() {
-    dry_run = true
+var dry_run: boolean = true
+export function setDryRun(v: boolean) {
+    dry_run = v
 }
 
 function alertLockedFunction(name: string) {

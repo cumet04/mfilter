@@ -10,6 +10,7 @@ export function execute(filters: Array<FilterAction>, query: string = 'in:inbox 
         for (var filter of filters) {
             if (!filter(tw)) break
         }
+        Logger.log(`apply actions ${(<ThreadWrapper>tw).outputActions()} to thread: ${tw.getFirstMessageSubject()}`)
         tw.refresh()
     })
 }
