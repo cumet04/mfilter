@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "es5",
     "outDir": "./dest",
     "rootDir": "./src",
-
-    "alwaysStrict": true,
-    "inlineSourceMap": true,
+    "strict": true,
     "noEmitOnError": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "pretty": true,
-    "strictNullChecks": true
+    "newLine": "LF"
   }
 }
