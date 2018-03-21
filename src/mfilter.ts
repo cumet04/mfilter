@@ -1,13 +1,15 @@
-export type Mail = GoogleAppsScript.Gmail.GmailMessage
+import { ThreadWrapper } from "./wrapper"
 
-export type FilterAction = (mail: Mail) => boolean
+type GmailThread = GoogleAppsScript.Gmail.GmailThread
+
+export type FilterAction = (thread: GmailThread) => boolean
 
 export function execute(filters: Array<FilterAction>, query: string = 'in:inbox -in:chats') {
     GmailApp.search(query).forEach(thread => {
-        var mail = GmailApp.getMessagesForThread(thread).pop()
-        if (mail == undefined) return
+        var tw = ThreadWrapper.wrap(thread)
         for (var filter of filters) {
-            if (!filter(mail)) break
+            if (!filter(tw)) break
         }
+        tw.refresh()
     })
 }

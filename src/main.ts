@@ -1,22 +1,26 @@
 import * as mfilter from "./mfilter"
+import { setDryRun } from "./wrapper"
 var global: any
+type GmailThread = GoogleAppsScript.Gmail.GmailThread
 
 function main() {
+    setDryRun()
+
     mfilter.execute([
-        (mail: mfilter.Mail) => {
+        (thread: GmailThread) => {
             Logger.log("flow1.action")
-            Logger.log(`title: ${mail.getSubject()}`)
-            Logger.log(mail.getDate())
+            Logger.log(`title: ${thread.getFirstMessageSubject()}`)
+            Logger.log(thread.getLastMessageDate())
             return true
         },
-        (mail: mfilter.Mail) => {
+        (thread: GmailThread) => {
             Logger.log("flow2.action")
-            Logger.log(`title: ${mail.getSubject()}`)
+            Logger.log(`title: ${thread.getFirstMessageSubject()}`)
             return false
         },
-        (mail: mfilter.Mail) => {
+        (thread: GmailThread) => {
             Logger.log("flow3.action")
-            Logger.log(`title: ${mail.getSubject()}`)
+            Logger.log(`title: ${thread.getFirstMessageSubject()}`)
             return true
         },
     ])
