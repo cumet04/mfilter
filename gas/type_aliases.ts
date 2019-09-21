@@ -1,0 +1,3 @@
+// gapps's type names are too long...
+type Message = GoogleAppsScript.Gmail.GmailMessage;
+type Thread = GoogleAppsScript.Gmail.GmailThread;

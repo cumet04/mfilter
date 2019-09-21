@@ -1,30 +1,25 @@
-import * as mfilter from "./mfilter"
-import { setDryRun } from "./wrapper"
-var global: any
-type GmailThread = GoogleAppsScript.Gmail.GmailThread
-
 function main() {
-    setDryRun(true)
+  Actions.setDryRun(true);
 
-    mfilter.execute([
-        (thread: GmailThread) => {
-            Logger.log("flow1.action")
-            Logger.log(`title: ${thread.getFirstMessageSubject()}`)
-            Logger.log(thread.getLastMessageDate())
-            return true
-        },
-        (thread: GmailThread) => {
-            Logger.log("flow2.action")
-            Logger.log(`title: ${thread.getFirstMessageSubject()}`)
-            thread.markUnread()
-            return false
-        },
-        (thread: GmailThread) => {
-            Logger.log("flow3.action")
-            Logger.log(`title: ${thread.getFirstMessageSubject()}`)
-            return true
-        },
-    ])
+  const query = "in:inbox -in:chats";
+  const filters = [
+    (thread: Thread) => {
+      console.log("filter1");
+      return true;
+    },
+    (thread: Thread) => {
+      console.log("filter2");
+      return false;
+    },
+    (thread: Thread) => {
+      console.log("filter3");
+      return true;
+    }
+  ];
+
+  GmailApp.search(query).forEach(thread => {
+    for (let filter of filters) {
+      if (!filter(thread)) return;
+    }
+  });
 }
-
-global.main = main
