@@ -3,21 +3,15 @@
   "version": "1.0.0",
   "description": "gmail filter on GAS",
   "private": true,
-  "scripts": {
-    "deploy": "yarn build && yarn upload",
-    "build": "yarn tsc && yarn prebundle && browserify dest/main.js -p gasify -o bundle.js",
-    "prebundle": "perl -pe 's/^var global;$//' -i dest/main.js",
-    "upload": "gas push bundle.js"
-  },
-  "devDependencies": {
-    "@types/google-apps-script": "0.0.14",
-    "browserify": "^14.5.0",
-    "gasify": "^0.1.2",
-    "google-apps-script": "^2.8.1",
-    "tslint": "^5.9.1",
-    "typescript": "^2.6.1"
-  },
+  "scripts": {},
   "author": "",
   "license": "GPL",
-  "dependencies": {}
+  "dependencies": {
+    "typescript": "^3.6",
+    "@google/clasp": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/google-apps-script": "^0.0.60",
+    "prettier": "^1.18.2"
+  }
 }
