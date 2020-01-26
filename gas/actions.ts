@@ -8,6 +8,7 @@ export module Actions {
   }
 
   export function markRead(target: Message | Thread) {
+    if (dry_run) return;
     target.markRead();
   }
 }
